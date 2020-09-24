@@ -1,0 +1,13 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Service
+apiVersion: v1
+metadata:
+  name: angularv1-service
+spec:
+  selector:
+    app: angular
+    version: v1green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

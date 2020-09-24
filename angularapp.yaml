@@ -6,7 +6,7 @@ spec:
   selector: 
     matchLabels: 
       app: angular 
-  replicas: 2 # tells deployment to run 2 pods matching the template 
+  replicas: 1 # tells deployment to run 1 pods matching the template 
   template: 
     metadata: 
       labels: 
@@ -27,7 +27,7 @@ spec:
 kind: Service 
 apiVersion: v1 
 metadata: 
-  name: angular-service 
+  name: angular-service-hpa 
 spec: 
   selector: 
     app: angular 
@@ -35,5 +35,5 @@ spec:
   - protocol: TCP 
     port: 80 
     targetPort: 80 
-    nodePort: 31000 
+    nodePort: 8100 
   type: NodePort 

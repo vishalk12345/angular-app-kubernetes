@@ -22,3 +22,18 @@ spec:
           # based on CPU utilization
           requests:
             cpu: 100m
+--- 
+# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: angular-service-hpa 
+spec: 
+  selector: 
+    app: angular 
+  ports: 
+  - protocol: TCP 
+    port: 80 
+    targetPort: 80 
+    nodePort: 31100 
+  type: NodePort

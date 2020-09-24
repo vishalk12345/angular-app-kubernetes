@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: angular
-        image: angular-app:v1green
+        image: vishalk12345/angular-app:v1green
         ports:
         - containerPort: 80
         readinessProbe:

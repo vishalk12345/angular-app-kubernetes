@@ -1,0 +1,56 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: angularv1blue-deployment
+spec:
+  selector:
+    matchLabels:
+      app: angular
+      version: v1blue
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: angular
+        version: v1blue
+    spec:
+      containers:
+      - name: angular
+        image: vishalk12345/angular-app:v1blue
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+kind: Service
+apiVersion: v1
+metadata:
+  name: angularv1-service
+spec:
+  selector:
+    app: angular
+    version: v1blue
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: angularv1-ingress
+  namespace: default
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: angularv1-service
+          servicePort: 80

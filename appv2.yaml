@@ -26,31 +26,3 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
----
-# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
-kind: Service
-apiVersion: v1
-metadata:
-  name: angularv1-service
-spec:
-  selector:
-    app: angular
-    version: v1green
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
----
-kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
-metadata:
-  name: angularv1-ingress
-  namespace: default
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: angularv1-service
-          servicePort: 80

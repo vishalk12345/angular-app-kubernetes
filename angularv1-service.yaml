@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: angular
-    version: v1blue
+    version: v1green
   ports:
   - protocol: TCP
     port: 80

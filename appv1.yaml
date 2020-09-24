@@ -27,6 +27,19 @@ spec:
           periodSeconds: 5
           successThreshold: 1
 ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: angularv1-service
+spec:
+  selector:
+    app: angular
+    version: v1blue
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
 kind: Ingress
 apiVersion: networking.k8s.io/v1beta1
 metadata:
